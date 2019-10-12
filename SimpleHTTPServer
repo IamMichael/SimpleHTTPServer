@@ -1,0 +1,18 @@
+#!/bin/bash
+
+webServerDir="/opt/webServer"
+webServerPort="8000"
+
+if  [ ! -d ${webServerDir} ]; then
+  mkdir -p ${webServerDir}
+fi
+
+case $1 in
+  start)
+    cd ${webServerDir}
+    nohup python -m SimpleHTTPServer ${webServerPort} > /var/log/SimpleHTTPServer.log 2>&1 &
+;;
+  stop)
+    ps aux | grep "SimpleHTTPServer" | grep -v "grep" | awk '{print $2}' | xargs kill -9
+esac
+

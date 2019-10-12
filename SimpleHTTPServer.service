@@ -1,0 +1,13 @@
+[Unit]
+Description=SimpleHTTPServer
+After=network.target
+Wants=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/SimpleHTTPServer start
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
